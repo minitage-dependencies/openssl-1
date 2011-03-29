@@ -37,11 +37,11 @@ do
   shift
 done
 
-CERTSCONF=$(dirname $0)/ca-certificates.conf
-CERTSDIR=$(dirname $0)$/ca-certificates
-LOCALCERTSDIR=$(dirname $0)/ca-certificates
+cd $(dirname $0);TOP="$PWD";CERTSCONF=$TOP/ca-certificates.conf
+CERTSDIR=$TOP/ca-certificates
+LOCALCERTSDIR=$TOP/ca-certificates
 CERTBUNDLE=ca-certificates.crt
-ETCCERTSDIR=$(dirname $0)/parts/part/ssl/certs
+ETCCERTSDIR=$TOP/etc/certs
 
 cleanup() {
   rm -f "$TEMPBUNDLE"
@@ -146,15 +146,15 @@ fi
 
 echo "$ADDED_CNT added, $REMOVED_CNT removed; done."
 
-HOOKSDIR=/etc/ca-certificates/update.d
+HOOKSDIR=$TOP/tmp/etc/ca-certificates/update.d
 echo -n "Running hooks in $HOOKSDIR...."
-VERBOSE_ARG=
-[ "$verbose" = 0 ] || VERBOSE_ARG=--verbose
-eval run-parts $VERBOSE_ARG --test -- $HOOKSDIR | while read hook
-do
-  ( cat $ADDED
-    cat $REMOVED ) | $hook || echo E: $hook exited with code $?.
-done
+#VERBOSE_ARG=--verbose
+#[ "$verbose" = 0 ] || VERBOSE_ARG=--verbose
+#eval run-parts $VERBOSE_ARG --test -- $HOOKSDIR | while read hook
+#do
+#  ( cat $ADDED
+#    cat $REMOVED ) | $hook || echo E: $hook exited with code $?.
+#done
 echo "done."
 
 # vim:set et sw=2:
