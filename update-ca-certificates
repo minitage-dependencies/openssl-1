@@ -146,8 +146,8 @@ fi
 
 echo "$ADDED_CNT added, $REMOVED_CNT removed; done."
 
-HOOKSDIR=$TOP/tmp/etc/ca-certificates/update.d
-echo -n "Running hooks in $HOOKSDIR...."
+#HOOKSDIR=$TOP/tmp/etc/ca-certificates/update.d
+#echo -n "Running hooks in $HOOKSDIR...."
 #VERBOSE_ARG=--verbose
 #[ "$verbose" = 0 ] || VERBOSE_ARG=--verbose
 #eval run-parts $VERBOSE_ARG --test -- $HOOKSDIR | while read hook
