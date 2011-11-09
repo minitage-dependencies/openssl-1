@@ -127,8 +127,7 @@ then
   done
 fi
 
-chmod 0644 "$TEMPBUNDLE"
-mv -f "$TEMPBUNDLE" "$CERTBUNDLE"
+rm -f "$CERTBUNDLE"
 
 ADDED_CNT=$(wc -l < "$ADDED")
 REMOVED_CNT=$(wc -l < "$REMOVED")
@@ -144,17 +143,20 @@ then
   fi
 fi
 
+chmod 0644 "$TEMPBUNDLE"
+mv -f "$TEMPBUNDLE" "$CERTBUNDLE"
+
 echo "$ADDED_CNT added, $REMOVED_CNT removed; done."
 
-#HOOKSDIR=$TOP/tmp/etc/ca-certificates/update.d
-#echo -n "Running hooks in $HOOKSDIR...."
-#VERBOSE_ARG=--verbose
-#[ "$verbose" = 0 ] || VERBOSE_ARG=--verbose
-#eval run-parts $VERBOSE_ARG --test -- $HOOKSDIR | while read hook
-#do
-#  ( cat $ADDED
-#    cat $REMOVED ) | $hook || echo E: $hook exited with code $?.
-#done
+HOOKSDIR=$TOP/tmp/etc/ca-certificates/update.d
+echo -n "Running hooks in $HOOKSDIR...."
+VERBOSE_ARG=
+[ "$verbose" = 0 ] || VERBOSE_ARG=--verbose
+eval run-parts $VERBOSE_ARG --test -- $HOOKSDIR | while read hook
+do
+  ( cat $ADDED
+    cat $REMOVED ) | $hook || echo E: $hook exited with code $?.
+done
 echo "done."
 
 # vim:set et sw=2:

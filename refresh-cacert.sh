@@ -8,7 +8,9 @@ fi
 TOP=$PWD
 DATA="$TOP/ca-certificates"
 P=$TOP/parts/part/ssl
-FN="ca-certificates_20090814+nmu3_all.deb"
+
+
+FN="ca-certificates_20111025_all.deb"
 SRC="http://ftp.de.debian.org/debian/pool/main/c/ca-certificates/$FN"
 uco="$TOP/tmp/usr/sbin/update-ca-certificates"
 uc="$TOP/update-ca-certificates"
@@ -19,7 +21,7 @@ mkdir tmp
 cd tmp
 curl -O $SRC
 dpkg-deb -x $FN .
-tar xzf data.tar.gz
+[[ -f  data.tar.gz ]] && tar xzf data.tar.gz
 rm -f control.tar.gz data.tar.gz debian-binary
 pushd usr/share/ca-certificates/
 # | $sed -re s:^:$DATA/:g 
