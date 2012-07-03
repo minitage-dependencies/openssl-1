@@ -10,7 +10,7 @@ DATA="$TOP/ca-certificates"
 P=$TOP/parts/part/ssl
 
 
-FN="ca-certificates_20111025_all.deb"
+FN="ca-certificates_20120623_all.deb"
 SRC="http://ftp.de.debian.org/debian/pool/main/c/ca-certificates/$FN"
 uco="$TOP/tmp/usr/sbin/update-ca-certificates"
 uc="$TOP/update-ca-certificates"
