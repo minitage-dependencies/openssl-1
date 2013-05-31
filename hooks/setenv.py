@@ -7,7 +7,8 @@ def configure(options,buildout):
             cwd=os.getcwd()
             try:
                 os.chdir(options['compile-directory'])
-                cmd = './Configure %s %s' % (
+                cmd = './Configure --prefix %s %s %s' % (
+                    options['location'],
                     options['configure-options'],
                     options['configure-options-snowleopard']
                     )

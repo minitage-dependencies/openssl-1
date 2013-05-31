@@ -1,4 +1,5 @@
 *.pyc
+etc
 .download
 tmp
 .installed.cfg
