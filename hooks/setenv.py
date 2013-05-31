@@ -1,5 +1,21 @@
-import os
+import os,sys
 from minitage.core.common import append_env_var
+
+def configure(options,buildout):
+    if os.uname()[0] == 'Darwin':
+        if not '10.5' in  os.uname()[2]:
+            cwd=os.getcwd()
+            try:
+                os.chdir(options['compile-directory'])
+                cmd = './Configure %s %s' % (
+                    options['configure-options'],
+                    options['configure-options-snowleopard']
+                    )
+                print 'Running %s' % cmd
+                os.system(cmd)
+            finally:
+                os.chdir(cwd)
+
 
 def patchopenssl(options,buildout):
 
